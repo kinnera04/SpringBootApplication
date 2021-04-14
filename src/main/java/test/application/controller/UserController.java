@@ -1,4 +1,4 @@
-package com.javaSpring.controller;
+package test.application.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.javaSpring.model.User;
-import com.javaSpring.repository.UserRepository;
+import test.application.dto.UserDTO;
+import test.application.model.User;
+import test.application.repository.UserAddressRepository;
+import test.application.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/users")
@@ -23,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserAddressRepository userAddressRepository;
 	
 
 	@GetMapping
@@ -40,7 +45,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/createUser")
-	public String createUser(@Valid @RequestBody User user) {
+	public String createUser(@Valid @RequestBody UserDTO userDto) {
+		User user = userDto.createUser();
+		userAddressRepository.save(user.getUserAddress());
 		userRepository.save(user);
 		
 		return "User - "+user.getUserName()+" details are saved "+"with user id - "+user.getId();

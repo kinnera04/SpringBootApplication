@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="user" type="user"/>
+
+  <xs:element name="useraddress" type="userAddress"/>
+
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element name="creationTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dateofBirth" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="updatedTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="userAddress" type="userAddress" minOccurs="0"/>
+      <xs:element name="userName" type="xs:string" minOccurs="0"/>
+      <xs:element name="userType" type="userType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userAddress">
+    <xs:sequence>
+      <xs:element name="areaCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="state" type="xs:string" minOccurs="0"/>
+      <xs:element name="streetAddress" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="userType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EMPLOYEE"/>
+      <xs:enumeration value="STUDENT"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

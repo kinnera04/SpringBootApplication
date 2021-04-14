@@ -1,4 +1,4 @@
-package com.javaSpring.model;
+package test.application.model;
 
 import java.util.Date;
 
@@ -9,14 +9,19 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.javaSpring.util.UserType;
+import test.application.util.UserType;
 
+@XmlRootElement(name= "user")
+@XmlAccessorType
 @Entity(name = "USER")
 public class User {
 
@@ -52,6 +57,9 @@ public class User {
 	@Column(name = "USER_TYPE")
 	private UserType userType;
 
+	@ManyToOne
+	private UserAddress userAddress;
+	
 	@Transient
 	private String dateOfBirthString;
 	
@@ -62,7 +70,7 @@ public class User {
 	}
 
 	public User(String userName, String password, String email, Date creationTime, Date dateofBirth,
-			UserType userType) {
+			UserType userType,UserAddress userAddress) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -70,6 +78,7 @@ public class User {
 		this.creationTime = creationTime;
 		this.dateofBirth = dateofBirth;
 		this.userType = userType;
+		this.userAddress = userAddress;
 	}
 
 	public Long getId() {
@@ -141,6 +150,15 @@ public class User {
 		this.email = email;
 	}
 
+	public UserAddress getUserAddress() {
+		return userAddress;
+	}
 
+	public void setUserAddress(UserAddress userAddress) {
+		this.userAddress = userAddress;
+	}
+
+
+	
 	
 }

@@ -1,4 +1,4 @@
-package com.javaSpring.util;
+package test.application.util;
 
 public enum UserType {
 	

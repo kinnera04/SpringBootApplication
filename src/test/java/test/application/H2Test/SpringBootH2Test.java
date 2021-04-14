@@ -1,5 +1,6 @@
-package com.javaSpring.H2Test;
+package test.application.H2Test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -9,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.javaSpring.model.User;
-import com.javaSpring.repository.UserRepository;
-import com.javaSpring.util.UserType;
+import test.application.model.User;
+import test.application.repository.UserRepository;
+import test.application.util.UserType;
 
 @SpringBootTest
-public class Spring_boot_H2_test {
+class SpringBootH2Test {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -25,7 +26,7 @@ public class Spring_boot_H2_test {
 		
 		User created = userRepository.save(getUser());
 		
-		assertTrue(created != null);
+		assertNotNull(created);
 	}
 	
 	private User getUser() {
