@@ -1,8 +1,13 @@
 package test.application.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -60,6 +66,10 @@ public class User {
 	@ManyToOne
 	private UserAddress userAddress;
 	
+	@ElementCollection
+	@CollectionTable(name = "data")
+	private List<String> oldPasswords = new ArrayList<String>();
+	
 	@Transient
 	private String dateOfBirthString;
 	
@@ -69,16 +79,18 @@ public class User {
 		super();
 	}
 
-	public User(String userName, String password, String email, Date creationTime, Date dateofBirth,
-			UserType userType,UserAddress userAddress) {
+	public User(String userName, String password, String email, Date dateofBirth,
+			UserType userType,UserAddress userAddress,List<String> oldPwds) {
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
-		this.creationTime = creationTime;
+		this.creationTime = new Date();
 		this.dateofBirth = dateofBirth;
 		this.userType = userType;
 		this.userAddress = userAddress;
+		if(oldPwds!=null && !oldPwds.isEmpty())
+			this.oldPasswords = oldPwds;
 	}
 
 	public Long getId() {
@@ -157,6 +169,16 @@ public class User {
 	public void setUserAddress(UserAddress userAddress) {
 		this.userAddress = userAddress;
 	}
+
+	public List<String> getOldPasswords() {
+		return oldPasswords;
+	}
+
+	public void setOldPasswords(List<String> oldPasswords) {
+		this.oldPasswords = oldPasswords;
+	}
+	
+	
 
 
 	

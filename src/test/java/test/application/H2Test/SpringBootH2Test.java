@@ -3,6 +3,8 @@ package test.application.H2Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.jupiter.api.DisplayName;
@@ -20,8 +22,8 @@ class SpringBootH2Test {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	@Test
-	@DisplayName("Create User Test ")
 	void createUserTest() {
 		
 		User created = userRepository.save(getUser());
@@ -37,6 +39,7 @@ class SpringBootH2Test {
 		user.setPassword("password");
 		user.setDateofBirth(new Date());
 		user.setCreationTime(new Date());
+		user.setOldPasswords(new ArrayList<>(Arrays.asList("pwd1","pwd2")));
 		
 		return user;
 	}

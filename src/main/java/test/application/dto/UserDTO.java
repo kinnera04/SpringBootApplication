@@ -1,6 +1,7 @@
 package test.application.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import test.application.model.User;
 import test.application.model.UserAddress;
@@ -26,6 +27,8 @@ public class UserDTO {
 
 	private UserAddress userAddress;
 	
+	private List<String> oldPasswords;
+	
 	public User createUser() {
 		User user = new User();
 		user.setUserName(this.getUserName());
@@ -35,6 +38,8 @@ public class UserDTO {
 		user.setEmail(this.getEmail());
 		user.setUserType(this.getUserType());
 		user.setDateofBirth(this.getDateofBirth());
+		if(this.oldPasswords!=null && !this.oldPasswords.isEmpty())
+			user.setOldPasswords(this.oldPasswords);
 		return user;
 	}
 	
@@ -48,6 +53,8 @@ public class UserDTO {
 		this.setUserType(user.getUserType());
 		this.setUpdatedTime(user.getUpdatedTime());
 		this.setDateofBirth(user.getDateofBirth());
+		if(user.getOldPasswords()!=null && !user.getOldPasswords().isEmpty())
+			this.setOldPasswords(oldPasswords);
 		return this;
 	}
 
@@ -121,6 +128,14 @@ public class UserDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<String> getOldPasswords() {
+		return oldPasswords;
+	}
+
+	public void setOldPasswords(List<String> oldPasswords) {
+		this.oldPasswords = oldPasswords;
 	}
 	
 	

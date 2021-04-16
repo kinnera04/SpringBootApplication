@@ -1,6 +1,7 @@
 package test.application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -63,10 +64,10 @@ ConfigurableApplicationContext context = SpringApplication.run(SpringBootRestAnd
 		UserAddress address1 = new UserAddress("test2Street","test2State",
 				"test2City","test2ZipCode");
 		User user = new User("test1","test1","test1@gmail.com",
-				date,date,UserType.STUDENT,address);
+					date,UserType.STUDENT,address, new ArrayList<>(Arrays.asList("pwd1","pwd2")));
 
 		User user1 = new User("test2","test2","test2@gmail.com",
-				date,date,UserType.EMPLOYEE,address1);
+				date,UserType.EMPLOYEE,address1,new ArrayList<>(Arrays.asList("pwd1","pwd2")));
 
 		users.add(user);
 		users.add(user1);
