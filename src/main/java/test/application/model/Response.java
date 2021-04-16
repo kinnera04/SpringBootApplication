@@ -1,20 +1,17 @@
 package test.application.model;
 
-import java.math.BigInteger;
 
-import javax.persistence.*;
-
-public class task {
+public class Response {
 
 
 	private String message;
 	
-	private int Status;
+	private int status;
 
-	public task(String message, int status) {
+	public Response(String message, int status) {
 		super();
 		this.message = message;
-		Status = status;
+		this.status = status;
 	}
 
 	public String getMessage() {
@@ -26,11 +23,11 @@ public class task {
 	}
 
 	public int getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(int status) {
-		Status = status;
+		this.status = status;
 	}
 	
 	

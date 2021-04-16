@@ -1,7 +1,6 @@
 package test.application.controller;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import test.application.dto.UserDTO;
 import test.application.model.User;
-import test.application.model.task;
+import test.application.model.Response;
 import test.application.repository.UserAddressRepository;
 import test.application.repository.UserRepository;
 
@@ -40,14 +39,10 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getUserById(@PathVariable(value = "id") Long userId){
-			
-		/*User user = userRepository.findById(userId)
-				  .orElseThrow(() -> new NoSuchElementException("User not availbele for Id :"+userId));
-			*/
 		Optional<User> user = userRepository.findById(userId);
 		
 		if(user.isEmpty()) {
-			task t = new task("user not found",400);
+			Response t = new Response("user not found",400);
 			return ResponseEntity.status(400).body(t);
 			
 		}
@@ -59,27 +54,26 @@ public class UserController {
 		User user = userDto.createUser();
 		userAddressRepository.save(user.getUserAddress());
 		userRepository.save(user);
-		//User updateUser = userRepository.findById(user.getUserId());
-
 		return "User - "+user.getUserName()+" details are saved "+"with user id - "+user.getId();
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateStudent(@RequestBody User student, @PathVariable long id) {
+	public ResponseEntity<Object> updateStudent(@RequestBody UserDTO student, @PathVariable long id) {
 
 		Optional<User> studentOptional = userRepository.findById(id);
 
 		if (studentOptional.isEmpty()) {
-			task t = new task("user not found",400);
+			Response t = new Response("user not found",400);
 			return ResponseEntity.status(400).body(t);
 			
 		}
 
-		student.setId(id);
-		userAddressRepository.save(student.getUserAddress());
-		userRepository.save(student);
+		User user = student.createUser();
+		user.setId(id);
+		userAddressRepository.save(user.getUserAddress());
+		userRepository.save(user);
 
-		return ResponseEntity.ok().body(student);
+		return ResponseEntity.ok().body(user);
 	}
 
 }
