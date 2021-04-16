@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -68,7 +66,7 @@ public class User {
 	
 	@ElementCollection
 	@CollectionTable(name = "data")
-	private List<String> oldPasswords = new ArrayList<String>();
+	private List<String> oldPasswords = new ArrayList<>();
 	
 	@Transient
 	private String dateOfBirthString;

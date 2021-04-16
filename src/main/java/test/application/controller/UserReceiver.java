@@ -21,6 +21,7 @@ public class UserReceiver {
 	
 	  @JmsListener(destination = "sendingUsers", containerFactory = "myFactory") 
 	  public void receiveMessage(User user) { 
+
 		  userAddressRepo.save(user.getUserAddress());
 		  userRepo.save(user);
 	  }
