@@ -2,7 +2,7 @@
 ## Description
 I have created a spring Boot application with REST API using H2 and JMS.
 
-Once you clone the respository by using GIt url, Please do the following steps.
+Once you clone the repository by using Git url, Please do the following steps.
 
 1.Import existing maven projects/projects from Git.
 Once it is imported in STS/Eclipse/other IDES. Do right click the project
