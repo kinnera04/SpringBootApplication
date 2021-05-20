@@ -24,7 +24,6 @@ public class UserReceiver {
 
 		  userAddressRepo.save(user.getUserAddress());
 		  userRepo.save(user);
-		  System.out.println("saved....user");
 	  }
 	 
 }
